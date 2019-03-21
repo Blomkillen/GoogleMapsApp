@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Map from 'google-map-react';
-import Marker from './marker.js';
+import Marker from './marker_container.js';
+
 
  
 class GoogleMaps extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleChildClick = this.handleChildClick.bind(this);
  
   }
 
@@ -21,18 +23,25 @@ class GoogleMaps extends React.Component {
   }
 
   putMarkerOnMap(){
+    console.log('submit clicked...');
+  }
+
+  handleChildClick(){
+    console.log('clicking child...');
+    this.props.openModal();
   }
 
 
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '100vh', width: '80%'}}>
         <Map
           bootstrapURLKeys={{ key: 'AIzaSyD-uqYxDHqx4cIyDH7s0zvTxuRMdRsjhtM' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
-          onClick={this.handleClick}
+          onChildClick={this.handleChildClick}
+          onClick={this.props.modalOpen ? null : this.handleClick }
         >
         <Marker lat={this.props.lat} lng={this.props.lng} />
         </Map>
@@ -47,7 +56,9 @@ GoogleMaps.propTypes = {
   text: PropTypes.string.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  putMarkerOnMap: PropTypes.func.isRequired
+  modalOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func.isRequired,
+  openModal: PropTypes.func.isRequired,
 }
  
 export default GoogleMaps;

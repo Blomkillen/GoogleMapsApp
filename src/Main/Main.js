@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleMaps from './google_maps_container.js';
+import ListTable from '../ListTable/list_table_container.js';
 import './Main.css';
 
 class Main extends React.Component {
@@ -19,13 +20,16 @@ class Main extends React.Component {
   	
   render() {
     return (
-      <div className="App">
-      <div>
-        {this.props.text}
-        <button onClick={this.changeText} >Click me!</button>
-        </div>
-        <GoogleMaps zoom={11} center={{lat: 59.95, lng: 30.33}} />
-      </div>
+		<div className="App">
+			<div>
+				{this.props.text}
+				<button onClick={this.changeText} >Click me!</button>
+			</div>
+			<div className='divWrapper'>
+					<ListTable />
+					<GoogleMaps  zoom={11} center={{lat: 59.95, lng: 30.33}} />
+			</div>
+		</div>
       
     );
   }
