@@ -7,6 +7,8 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CHANGE_NAME_TEXT = 'CHANGE_NAME_TEXT';
 export const CHANGE_COMMENT_TEXT = 'CHANGE_COMMENT_TEXT';
+export const GO_TO_BOOKMARK = 'GO_TO_BOOKMARK';
+
 
 /*
  * other constants
@@ -34,4 +36,8 @@ export function changeNameText(text) {
 
 export function changeCommentText(text) {
   return { type: CHANGE_COMMENT_TEXT, text }
+}
+
+export function goToBookmark(bookmark) {
+  return { type: GO_TO_BOOKMARK, bookmark  }
 }

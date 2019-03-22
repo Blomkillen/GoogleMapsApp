@@ -1,7 +1,7 @@
 import {
   ADD_ITEM,
   DELETE_ITEM,
-  EDIT_ITEM
+  EDIT_ITEM,
 } from '../Actions/list_table_actions.js';
 
 const initialState = {

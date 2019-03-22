@@ -27,7 +27,7 @@ class Main extends React.Component {
 			</div>
 			<div className='divWrapper'>
 					<ListTable />
-					<GoogleMaps  zoom={11} center={{lat: 59.95, lng: 30.33}} />
+					<GoogleMaps  zoom={11} defaultCenter={{lat: 59.33258, lng: 18.0649}} />
 			</div>
 		</div>
       
@@ -38,6 +38,7 @@ class Main extends React.Component {
 Main.propTypes = {
   changeText: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
+
 }
 
 export default Main;

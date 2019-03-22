@@ -8,6 +8,9 @@ import Main from './Main.js';
 const mapStateToProps = (state) => {
   return {
     text: state.main.text,
+    zoom: state.google.zoom,
+    lat: state.google.lat,
+    lng: state.google.lng
   }
 }
 

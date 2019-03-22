@@ -10,7 +10,9 @@ const mapStateToProps = (state) => {
   return {
     nameText: state.google.nameText,
     commentText: state.google.commentText,
-  	modalOpen: state.google.modalOpen
+  	modalOpen: state.google.modalOpen,
+    lat: state.google.lat,
+    lng: state.google.lng
   }
 }
 

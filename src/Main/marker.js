@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import star from '../Images/star.jpg';
+import shortId from 'shortid';
 
 class Marker extends React.Component {
   constructor(props) {
@@ -16,18 +17,22 @@ class Marker extends React.Component {
   handleNameChange(event) {
   	
     this.setState({name: event.target.value });
-    console.log(this.state);
   }
 
   handleCommentChange(event) {
   	
     this.setState({comment: event.target.value });
-    console.log(this.state);
   }
 
   handleSubmit(event) {
     console.log('Submit ', this.state);
-    this.props.addItemToList(this.state);
+    this.props.addItemToList({
+    	name: this.state.name,
+    	comment: this.state.comment,
+    	lat: this.props.lat,
+    	lng: this.props.lng,
+    	id: shortId.generate()
+    });
     this.setState({name: '', comment: ''});
     this.props.closeModal();
 
@@ -64,7 +69,7 @@ class Marker extends React.Component {
                     <button className="btn-continue" onClick={this.handleSubmit}>Save</button>
                 </div>
             </div>
-            <img className='marker' src={star}/>
+            <img className='marker' alt='marker' src={star}/>
         </div>
   	)
   }
@@ -75,6 +80,8 @@ Marker.propTypes = {
   addItemToList: PropTypes.func.isRequired,
   nameText: PropTypes.string,
   commetText: PropTypes.string,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
 }
 
 export default Marker;

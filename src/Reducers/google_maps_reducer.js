@@ -3,16 +3,20 @@ import {
   CLOSE_MODAL,
   OPEN_MODAL,
   CHANGE_NAME_TEXT,
-  CHANGE_COMMENT_TEXT
+  CHANGE_COMMENT_TEXT,
+  GO_TO_BOOKMARK
 } from '../Actions/google_maps_actions.js';
 
 const initialState = {
   text: "",
-  lat: null,
-  lng: null,
+  lat: 59.33258,
+  lng: 18.0649,
+  zoom: 11,
+  center: undefined,
   modalOpen: false,
   nameText: "",
   commentText: "",
+  bookmarkedClicked: false,
 }
 
 function google_maps(state = initialState, action) {
@@ -22,7 +26,9 @@ function google_maps(state = initialState, action) {
             text: action.markerData.text,
             lat: action.markerData.lat,
             lng: action.markerData.lng,
-            modalOpen: true
+            center: {lat: action.markerData.lat, lng: action.markerData.lng},
+            modalOpen: true,
+            bookmarkedClicked: false
           });
     case CLOSE_MODAL:
       return Object.assign({}, state, {
@@ -39,6 +45,14 @@ function google_maps(state = initialState, action) {
     case CHANGE_COMMENT_TEXT:
       return Object.assign({}, state, {
             commentText: action.text
+          });
+    case GO_TO_BOOKMARK:
+      return Object.assign({}, state, {
+            lat: action.bookmark.lat,
+            lng: action.bookmark.lng,
+            center: {lat: action.bookmark.lat, lng: action.bookmark.lng},
+            modalOpen: true,
+            bookmarkedClicked: true
           });
     default:
       return state

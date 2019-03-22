@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { changeText } from '../Actions/main_actions.js';
+import { goToBookmark } from '../Actions/google_maps_actions.js';
+
 import ListTable from './ListTable.js';
 
 
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ changeText }, dispatch); 
+  return bindActionCreators({ goToBookmark }, dispatch); 
   }
 
 export default connect(
