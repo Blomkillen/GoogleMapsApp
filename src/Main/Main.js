@@ -21,9 +21,8 @@ class Main extends React.Component {
   render() {
     return (
 		<div className="App">
-			<div>
-				{this.props.text}
-				<button onClick={this.changeText} >Click me!</button>
+			<div className='topMenu'>
+				<h1>Google Maps App</h1>
 			</div>
 			<div className='divWrapper'>
 					<ListTable />

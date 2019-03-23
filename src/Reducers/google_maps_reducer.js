@@ -13,7 +13,10 @@ const initialState = {
   lng: 18.0649,
   zoom: 11,
   center: undefined,
-  modalOpen: false,
+  showModal: false,
+  currentModal: '',
+  currentBookmark: {},
+  showMarker: false,
   nameText: "",
   commentText: "",
   bookmarkedClicked: false,
@@ -27,16 +30,19 @@ function google_maps(state = initialState, action) {
             lat: action.markerData.lat,
             lng: action.markerData.lng,
             center: {lat: action.markerData.lat, lng: action.markerData.lng},
-            modalOpen: true,
+            showModal: true,
+            currentModal: 'add',
+            showMarker: true,
             bookmarkedClicked: false
           });
     case CLOSE_MODAL:
       return Object.assign({}, state, {
-            modalOpen: false
+            showModal: false,
+            showMarker: false,
           });
     case OPEN_MODAL:
       return Object.assign({}, state, {
-            modalOpen: true
+            showModal: true
           });
     case CHANGE_NAME_TEXT:
       return Object.assign({}, state, {
@@ -51,7 +57,10 @@ function google_maps(state = initialState, action) {
             lat: action.bookmark.lat,
             lng: action.bookmark.lng,
             center: {lat: action.bookmark.lat, lng: action.bookmark.lng},
-            modalOpen: true,
+            showModal: true,
+            currentModal: 'display',
+            currentBookmark: action.bookmark,
+            showMarker: true,
             bookmarkedClicked: true
           });
     default:

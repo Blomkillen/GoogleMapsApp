@@ -14,11 +14,11 @@ export const EDIT_ITEM = 'EDIT_ITEM';
  * action creators
  */
 
-export function addItemToList(item) {
+export function addBookmark(item) {
   return { type: ADD_ITEM, item }
 }
 
-export function deleteItemToList(id) {
+export function deleteBookmark(id) {
   return { type: DELETE_ITEM, id }
 }
 

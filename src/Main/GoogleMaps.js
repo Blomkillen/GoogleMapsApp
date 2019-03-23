@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Map from 'google-map-react';
-import Marker from './marker_container.js';
+import Marker from '../Marker/marker_container.js';
+import Modal from '../Modal/modal_container.js';
 
 
  
@@ -9,7 +10,6 @@ class GoogleMaps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstLoad: true,
       center: this.props.defaultCenter,
       zoom: this.props.zoom
 
@@ -39,9 +39,8 @@ class GoogleMaps extends React.Component {
     console.log('x: ', x);
     console.log('y: ', y);
     this.setState({
-      firstLoad: false,
       center: {lat: lat, lng: lng },
-      zoom: 11,      
+      zoom: this.state.zoom <= 11 ? 11 : this.state.zoom,      
     });
     this.props.putMarkerOnMap({lat: lat, lng: lng });
     console.log(this.state);
@@ -69,16 +68,17 @@ class GoogleMaps extends React.Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '100vh', width: '80%'}}>
+      <div style={{ height: '90vh', width: '80%'}}>
         <Map
           bootstrapURLKeys={{ key: 'AIzaSyD-uqYxDHqx4cIyDH7s0zvTxuRMdRsjhtM' }}
           onChange={this.onChangeEvent}
           center={this.state.center ? this.state.center : this.props.defaultCenter}
           zoom={this.state.zoom ? this.state.zoom : this.props.zoom}
           onChildClick={this.handleChildClick}
-          onClick={this.props.modalOpen ? null : this.handleClick }
+          onClick={this.props.showModal === true ? null : this.handleClick }
         >
-        {this.state.firstLoad === true ? null : <Marker lat={this.props.lat} lng={this.props.lng} />}
+        {this.props.showModal === true ? <Modal lat={this.props.lat} lng={this.props.lng} /> : null}
+        {this.props.showMarker === true ? <Marker lat={this.props.lat} lng={this.props.lng} /> : null}
         </Map>
       </div>
     );
@@ -91,7 +91,8 @@ GoogleMaps.propTypes = {
   zoom: PropTypes.number.isRequired,
   lat: PropTypes.number,
   lng: PropTypes.number,
-  modalOpen: PropTypes.bool.isRequired,
+  showMarker: PropTypes.bool.isRequired,
+  showModal: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
   openModal: PropTypes.func.isRequired,
   putMarkerOnMap: PropTypes.func.isRequired,

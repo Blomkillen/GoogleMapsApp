@@ -11,7 +11,9 @@ const mapStateToProps = (state) => {
   	lat: state.google.lat,
   	lng: state.google.lng,
   	zoom: state.google.zoom,
-  	modalOpen: state.google.modalOpen,
+  	showModal: state.google.showModal,
+    currentModal: state.google.currentModal,
+    showMarker: state.google.showMarker,
   	bookmarkClicked: state.google.bookmarkedClicked
   }
 }

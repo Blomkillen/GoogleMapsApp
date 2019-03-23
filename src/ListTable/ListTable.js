@@ -12,6 +12,7 @@ class ListTable extends React.Component {
     this.formatBookmarks = this.formatBookmarks.bind(this);
     this.bookmarkClick = this.bookmarkClick.bind(this);
     this.quickSearch = this.quickSearch.bind(this);
+    this.deleteBookmark = this.deleteBookmark.bind(this);
   }
 
   bookmarkClick(e){
@@ -22,14 +23,19 @@ class ListTable extends React.Component {
   	this.props.goToBookmark(clickedBookmark);
   }
 
+  deleteBookmark(e) {
+    console.log('deleting bookmark', e.target.id);
+    const bookmarkId = e.target.id;
+    this.props.deleteBookmark(bookmarkId);
+  }
+
   quickSearch() {
-  	  var input, filter, table, tr, td, i, name;
+  	let input, filter, table, tr, td, i, name;
 	  input = document.getElementById("searchInput");
 	  filter = input.value.toUpperCase();
 	  table = document.getElementById("bookmarkTable");
 	  tr = table.getElementsByTagName("tr");
 
-	  // Loop through all table rows, and hide those who don't match the search query
 	  for (i = 0; i < tr.length; i++) {
 	    td = tr[i].getElementsByTagName("td")[0];
 	    if (td) {
@@ -47,6 +53,7 @@ class ListTable extends React.Component {
   	return this.props.bookmarks.map((item) => (
   		<tr className='bookmarks' key={shortId.generate()}>
 	  		<td id={item.id} onClick={this.bookmarkClick} ><img alt='icon' style={{width: '20px', height: '20px', float: 'left'}} src={star}/>{item.name}</td>
+        <td><button id={item.id} onClick={this.deleteBookmark}>Delete</button></td>
   		</tr>
   		));
   }
@@ -71,6 +78,7 @@ class ListTable extends React.Component {
 ListTable.propTypes = {
   bookmarks: PropTypes.array,
   goToBookmark: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
 }
  
 export default ListTable;
