@@ -10,6 +10,7 @@ import ListTable from './ListTable.js';
 const mapStateToProps = (state) => {
   return {
     bookmarks: state.table.bookmarks,
+    showModal: state.google.showModal,
   }
 }
 

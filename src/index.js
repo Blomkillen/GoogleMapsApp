@@ -7,7 +7,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import App from './App.js';
 
 const store = createStore(googleMapsApp);
-console.log(store.getState());
 
 render(
   <Provider store={store}>

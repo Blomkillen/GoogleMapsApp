@@ -1,7 +1,6 @@
 import {
   ADD_ITEM,
   DELETE_ITEM,
-  EDIT_ITEM,
 } from '../Actions/list_table_actions.js';
 
 const initialState = {
@@ -15,13 +14,8 @@ function list_table(state = initialState, action) {
            bookmarks: state.bookmarks.concat(action.item)
           });
     case DELETE_ITEM:
-      console.log('inside reducer id ',action);
       return Object.assign({}, state, {
             bookmarks: state.bookmarks.filter((item) => item.id !== action.id)
-          });
-    case EDIT_ITEM:
-      return Object.assign({}, state, {
-            
           });
     default:
       return state

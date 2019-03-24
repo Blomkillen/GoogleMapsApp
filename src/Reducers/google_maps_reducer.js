@@ -4,11 +4,12 @@ import {
   OPEN_MODAL,
   CHANGE_NAME_TEXT,
   CHANGE_COMMENT_TEXT,
-  GO_TO_BOOKMARK
+  GO_TO_BOOKMARK,
+  ADD_API_KEY
 } from '../Actions/google_maps_actions.js';
 
 const initialState = {
-  text: "",
+  text: '',
   lat: 59.33258,
   lng: 18.0649,
   zoom: 11,
@@ -17,9 +18,10 @@ const initialState = {
   currentModal: '',
   currentBookmark: {},
   showMarker: false,
-  nameText: "",
-  commentText: "",
+  nameText: '',
+  commentText: '',
   bookmarkedClicked: false,
+  googleApiKey: '',
 }
 
 function google_maps(state = initialState, action) {
@@ -39,6 +41,7 @@ function google_maps(state = initialState, action) {
       return Object.assign({}, state, {
             showModal: false,
             showMarker: false,
+            bookmarkedClicked: false,
           });
     case OPEN_MODAL:
       return Object.assign({}, state, {
@@ -52,11 +55,16 @@ function google_maps(state = initialState, action) {
       return Object.assign({}, state, {
             commentText: action.text
           });
+    case ADD_API_KEY:
+      return Object.assign({}, state, {
+            googleApiKey: action.key
+          });
     case GO_TO_BOOKMARK:
       return Object.assign({}, state, {
             lat: action.bookmark.lat,
             lng: action.bookmark.lng,
             center: {lat: action.bookmark.lat, lng: action.bookmark.lng},
+            zoom: action.bookmark.zoom,
             showModal: true,
             currentModal: 'display',
             currentBookmark: action.bookmark,

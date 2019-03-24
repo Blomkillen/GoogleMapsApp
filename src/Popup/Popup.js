@@ -10,10 +10,6 @@ class Popup extends React.Component {
     super(props);
     this.state = {name: '', comment: ''};
 
-    this.inputName = React.createRef();
-    this.inputComment = React.createRef();
-
-
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,12 +29,12 @@ class Popup extends React.Component {
 
 
   handleSubmit(event) {
-    console.log('Submit ', this.state);
     this.props.addBookmark({
     	name: this.state.name,
     	comment: this.state.comment,
     	lat: this.props.lat,
     	lng: this.props.lng,
+      zoom: this.props.zoom,
     	id: shortId.generate()
     });
     this.setState({name: '', comment: ''});
@@ -49,31 +45,31 @@ class Popup extends React.Component {
   addBookmarkModal(){
     return(
       <Modal.Dialog className='add-bookmark-window'>
-        <Modal.Header>
-          <Modal.Title>Add Bookmark</Modal.Title>
+        <Modal.Header className='bg-dark'>
+          <Modal.Title className='white-text'>Add Bookmark</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body className='bg-dark'>
           <Form>
             <Form.Group controlId="bookmarkName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control ref={this.inputName} onChange={this.handleNameChange} type="text" placeholder="Enter Name" />
-              <Form.Text id='popupName' className="text-muted">
+              <Form.Label className='white-text'>Name</Form.Label>
+              <Form.Control onChange={this.handleNameChange} type="text" placeholder="Enter Name" />
+              <Form.Text id='popupName' className="white-text">
                 Name your bookmark.
               </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="bookmarkComment">
-              <Form.Label>Comment</Form.Label>
-              <Form.Control ref={this.inputComment} onChange={this.handleCommentChange} type="text" placeholder="Comment..." />
-              <Form.Text id='popupComment' className="text-muted">
+              <Form.Label className='white-text'>Comment</Form.Label>
+              <Form.Control onChange={this.handleCommentChange} type="text" placeholder="Comment..." />
+              <Form.Text id='popupComment' className="white-text">
                 Comments on your bookmark.
               </Form.Text>
             </Form.Group>
           </Form>
         </Modal.Body>
 
-        <Modal.Footer>
+        <Modal.Footer className='justify-content-center bg-dark'>
           <Button variant="danger" onClick={this.props.closeModal}>
               Cancel
             </Button>
@@ -82,61 +78,30 @@ class Popup extends React.Component {
             </Button>
         </Modal.Footer>
       </Modal.Dialog>
-      /*
-      <div className='modal-window' >
-            <div className="modal-wrapper"
-                >
-                <div className="modal-header">
-                    <h3>Modal Header</h3>
-                    <span className="close-modal-btn" onClick={this.props.closeModal}>×</span>
-                </div>
-                <div className="modal-body">
-                   <div>
-              <label>
-                Name:
-                <input type="text" value={this.state.name} onChange={this.handleNameChange} />
-              </label>
-              </div>
-              <div>
-              <label>
-                Comment:
-                <input type="text" value={this.state.comment} onChange={this.handleCommentChange} />
-              </label>
-              </div>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn-cancel" onClick={this.props.closeModal}>Cancel</button>
-                    <button className="btn-continue" onClick={this.handleSubmit}>Save</button>
-                </div>
-            </div>
-        </div>*/
       );
   }
 
   displayBookmarkModal(){
     return (
       <Modal.Dialog className='display-bookmark-window'>
-        <Modal.Header>
-          <Modal.Title>Bookmark</Modal.Title>
+        <Modal.Header className='bg-dark'>
+          <Modal.Title className='white-text'>{this.props.currentBookmark.name}</Modal.Title>
         </Modal.Header>
-
-        <Modal.Body>
+        <Modal.Body className='bg-dark'>
           <div>
-            <label>
-              Name:
-              {this.props.currentBookmark.name}
+            <label className='white-text'>
+              <h6>{this.props.currentBookmark.comment}</h6>
             </label>
           </div>
-          <div>
-            <label>
-              Comment:
-              {this.props.currentBookmark.comment}
-            </label>
-          </div>
+          
         </Modal.Body>
 
-        <Modal.Footer>
-            <Button variant="primary" onClick={this.props.closeModal}>
+        <Modal.Footer className='bg-dark justify-content-between'>
+            <div>
+              <div><label className='white-text'>Lat:{this.props.currentBookmark.lat}</label></div>
+              <div><label className='white-text'>Lng:{this.props.currentBookmark.lng}</label></div>
+            </div>
+            <Button variant="primary" size='sm' onClick={this.props.closeModal}>
               Close
             </Button>
         </Modal.Footer>
@@ -159,6 +124,7 @@ Popup.propTypes = {
   commetText: PropTypes.string,
   lat: PropTypes.number,
   lng: PropTypes.number,
+  zoom: PropTypes.number.isRequired,
 }
 
 export default Popup;

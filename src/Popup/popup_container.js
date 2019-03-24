@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
     currentModal: state.google.currentModal,
     currentBookmark: state.google.currentBookmark,
     lat: state.google.lat,
-    lng: state.google.lng
+    lng: state.google.lng,
   }
 }
 

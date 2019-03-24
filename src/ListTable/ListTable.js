@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortId from 'shortid';
-import star from '../Images/star.jpg';
+import pinkMarkerBookmark from '../Images/pink-marker-bookmark.png';
 import { Table, Button, Form } from 'react-bootstrap';
 import './ListTable.css';
 
@@ -19,15 +19,15 @@ class ListTable extends React.Component {
   }
 
   bookmarkClick(e){
-  	console.log('clicked bookmark', e.target.id);
-  	const bookmarkId = e.target.id;
-  	const clickedBookmark = this.props.bookmarks.filter((id) => id.id === bookmarkId)[0];
-  	console.log('clicked bookmark info ', clickedBookmark);
-  	this.props.goToBookmark(clickedBookmark);
+    if(!this.props.showModal){
+      const bookmarkId = e.target.id;
+      const clickedBookmark = this.props.bookmarks.filter((id) => id.id === bookmarkId)[0];
+      this.props.goToBookmark(clickedBookmark);
+    }
+  	
   }
 
   deleteBookmark(e) {
-    console.log('deleting bookmark', e.target.id);
     const bookmarkId = e.target.id;
     this.props.deleteBookmark(bookmarkId);
   }
@@ -54,22 +54,23 @@ class ListTable extends React.Component {
   formatBookmarks(){
   	return this.props.bookmarks.map((item) => (
   		<tr className='bookmarks justify-content-between' key={shortId.generate()}>
+        <td style={{verticalAlign: 'middle'}} ><img src={pinkMarkerBookmark} alt='' /></td>
 	  		<th className='col-10 ' style={{wordBreak: 'break-all', verticalAlign: 'middle'}} id={item.id} onClick={this.bookmarkClick} >{item.name}</th>
-        <td className='col-2' style={{verticalAlign: 'middle'}} ><Button variant='danger' id={item.id} onClick={this.deleteBookmark}>X</Button></td>
+        <td className='col-2' style={{verticalAlign: 'middle'}} ><Button variant='danger' size='sm' id={item.id} onClick={this.deleteBookmark}>X</Button></td>
   		</tr>
   		));
   }
 
   render() {
     return (
-    	<div style={{width: '20%' }}>
-      <Table striped hover>
+    	<div style={{width: '20%', backgroundColor: 'grey' }}>
+      <Table striped hover className='table-dark' >
         <thead>
           <tr>
-            <td colSpan='2' style={{verticalAlign: 'middle', textAlign: 'center'}}>Bookmarks</td>
+            <td colSpan='3' style={{verticalAlign: 'middle', textAlign: 'center'}}><h5>Bookmarks</h5></td>
           </tr>
           <tr>
-            <td colSpan='2' >
+            <td colSpan='3' >
               <Form id='searchForm' onKeyUp={this.quickSearch} >
                 <Form.Group controlId="searchBookmarks">
                   <Form.Control ref={this.textInput} type="text" placeholder="Search for bookmarks..." />
@@ -88,7 +89,8 @@ class ListTable extends React.Component {
 }
 
 ListTable.propTypes = {
-  bookmarks: PropTypes.array,
+  bookmarks: PropTypes.array.isRequired,
+  showModal: PropTypes.bool.isRequired,
   goToBookmark: PropTypes.func.isRequired,
   deleteBookmark: PropTypes.func.isRequired,
 }

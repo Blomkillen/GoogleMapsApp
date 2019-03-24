@@ -1,5 +1,5 @@
 import React from 'react';
-import star from '../Images/star.jpg';
+import pinkMarker from '../Images/pink-marker.png';
 import './Marker.css';
 
 class Marker extends React.Component {
@@ -7,7 +7,7 @@ class Marker extends React.Component {
   render (){
   	return(
     	<div >
-          <img className='marker' alt='marker' src={star}/>
+          <img className='marker' alt='marker' src={pinkMarker}/>
       </div>
   	)
   }

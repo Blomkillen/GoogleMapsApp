@@ -1,22 +1,11 @@
-/*
- * action types
- */
-
 export const PUT_MARKER = 'PUT_MARKER';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CHANGE_NAME_TEXT = 'CHANGE_NAME_TEXT';
 export const CHANGE_COMMENT_TEXT = 'CHANGE_COMMENT_TEXT';
 export const GO_TO_BOOKMARK = 'GO_TO_BOOKMARK';
+export const ADD_API_KEY = 'ADD_API_KEY';
 
-
-/*
- * other constants
- */
-
-/*
- * action creators
- */
 
 export function putMarkerOnMap(markerData) {
   return { type: PUT_MARKER, markerData }
@@ -40,4 +29,8 @@ export function changeCommentText(text) {
 
 export function goToBookmark(bookmark) {
   return { type: GO_TO_BOOKMARK, bookmark  }
+}
+
+export function addGoogleApiKey(key) {
+  return { type: ADD_API_KEY, key  }
 }
