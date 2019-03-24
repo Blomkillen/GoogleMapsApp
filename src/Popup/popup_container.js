@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
 import { closeModal, openModal } from '../Actions/google_maps_actions.js';
 import { addBookmark } from '../Actions/list_table_actions.js';
-import Modal from './Modal.js';
+import Popup from './Popup.js';
 
 
 
@@ -25,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Modal)
+)(Popup)

@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shortId from 'shortid';
-import './Modal.css'
+import { Modal, Button, Form } from 'react-bootstrap';
+import './Popup.css'
 
 
-class Modal extends React.Component {
+class Popup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {name: '', comment: ''};
+
+    this.inputName = React.createRef();
+    this.inputComment = React.createRef();
+
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
@@ -43,6 +48,41 @@ class Modal extends React.Component {
 
   addBookmarkModal(){
     return(
+      <Modal.Dialog className='add-bookmark-window'>
+        <Modal.Header>
+          <Modal.Title>Add Bookmark</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="bookmarkName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control ref={this.inputName} onChange={this.handleNameChange} type="text" placeholder="Enter Name" />
+              <Form.Text id='popupName' className="text-muted">
+                Name your bookmark.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group controlId="bookmarkComment">
+              <Form.Label>Comment</Form.Label>
+              <Form.Control ref={this.inputComment} onChange={this.handleCommentChange} type="text" placeholder="Comment..." />
+              <Form.Text id='popupComment' className="text-muted">
+                Comments on your bookmark.
+              </Form.Text>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="danger" onClick={this.props.closeModal}>
+              Cancel
+            </Button>
+            <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+              Save
+            </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+      /*
       <div className='modal-window' >
             <div className="modal-wrapper"
                 >
@@ -69,32 +109,38 @@ class Modal extends React.Component {
                     <button className="btn-continue" onClick={this.handleSubmit}>Save</button>
                 </div>
             </div>
-        </div>
+        </div>*/
       );
   }
 
   displayBookmarkModal(){
     return (
-      <div className='modal-window' >
-            <div className="modal-wrapper"
-                >
-                <div className="modal-header">
-                    <h3>Modal Header</h3>
-                    <span className="close-modal-btn" onClick={this.props.closeModal}>×</span>
-                </div>
-                <div className="modal-body">
-                   <div>
-              <label>
-                Name:
-                {this.props.currentBookmark.name}
-              </label>
-              </div>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn-cancel" onClick={this.props.closeModal}>Close</button>
-                </div>
-            </div>
-        </div>
+      <Modal.Dialog className='display-bookmark-window'>
+        <Modal.Header>
+          <Modal.Title>Bookmark</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div>
+            <label>
+              Name:
+              {this.props.currentBookmark.name}
+            </label>
+          </div>
+          <div>
+            <label>
+              Comment:
+              {this.props.currentBookmark.comment}
+            </label>
+          </div>
+        </Modal.Body>
+
+        <Modal.Footer>
+            <Button variant="primary" onClick={this.props.closeModal}>
+              Close
+            </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
       );
   }
 
@@ -104,7 +150,7 @@ class Modal extends React.Component {
   	);
   }
 }
-Modal.propTypes = {
+Popup.propTypes = {
   closeModal: PropTypes.func.isRequired,
   currentModal: PropTypes.string,
   currentBookmark: PropTypes.object.isRequired,
@@ -115,4 +161,4 @@ Modal.propTypes = {
   lng: PropTypes.number,
 }
 
-export default Modal;
+export default Popup;

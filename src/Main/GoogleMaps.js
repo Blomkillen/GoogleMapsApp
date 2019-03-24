@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Map from 'google-map-react';
 import Marker from '../Marker/marker_container.js';
-import Modal from '../Modal/modal_container.js';
+import Popup from '../Popup/popup_container.js';
 
 
  
@@ -77,7 +77,7 @@ class GoogleMaps extends React.Component {
           onChildClick={this.handleChildClick}
           onClick={this.props.showModal === true ? null : this.handleClick }
         >
-        {this.props.showModal === true ? <Modal lat={this.props.lat} lng={this.props.lng} /> : null}
+        {this.props.showModal === true ? <Popup lat={this.props.lat} lng={this.props.lng} /> : null}
         {this.props.showMarker === true ? <Marker lat={this.props.lat} lng={this.props.lng} /> : null}
         </Map>
       </div>

@@ -1,19 +1,7 @@
-.table {
+#searchInput {
 	width: 100%;
-	height: 100%;
-	border: 3px solid black;
-	background: lightblue;
-}
-.header {
-	colspan: 2;
-	background: grey;
-	height: 30px;
-}
-.bookmarks {
-	text-align: left;
 }
 
-.bookmarks:hover {
-	text-align: left;
-	background: lightgreen;
+.bookmarks {
+	vertical-align: middle;
 }

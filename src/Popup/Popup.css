@@ -1,0 +1,14 @@
+.add-bookmark-window {
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    transform: translate(-50%, -135%);
+
+}
+.display-bookmark-window {
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    transform: translate(-50%, -90%);
+
+}
