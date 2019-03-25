@@ -20,10 +20,10 @@ For design the project uses [Bootstrap](https://getbootstrap.com/) for easy-to-w
 
 #### Personal Opinion ####
 
-To start with, the google-maps-react component was a little hard to understand in the beginning, especialy how the child components of the actual google map components worked. But after a lot of searching forums i figured it out.
+To start with, the google-maps-react component was a little hard to understand in the beginning, especially how the child components of the actual google map components worked. But after a lot of searching in forums i figured it out.
 
-React is a very logical and easy to understand framework for javascript development and if you get to understand Redux with it, it get alot more streamlined in my opninion. Redux makes it even more like object oriented programming liek Java or C# where the components in React becomes like classes in Java/C#.
+React is a very logical and easy to understand framework for javascript development and if you get to understand Redux with it, it get alot more streamlined in my opninion. Redux makes it even more like object oriented programming liek Java or C# where components in React becomes like classes in Java/C#.
 
-Bootstrap is very nice to work with since it contains a lot of very nice components for everyday use like tables and modals for the popup functionality. But it also inculdes the design od the components like buttons which gives a more modern look if you don't want to do it all from scratch.
+Bootstrap is very nice to work with since it contains a lot of very nice components for everyday use like tables and modals for the popup functionality. But it also inculdes the design of the components like buttons which gives a more modern look if you don't want to do it all from scratch.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
