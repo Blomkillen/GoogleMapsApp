@@ -1,4 +1,12 @@
-#searchInput {
-	width: 100%;
+.bookmark-icon {
+	vertical-align: middle;
 }
 
+.bookmark-name {
+	word-break: breal-all;
+	vertical-align: middle;
+}
+
+.bookmark-header {
+	text-align: center;
+}

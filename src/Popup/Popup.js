@@ -14,16 +14,16 @@ class Popup extends React.Component {
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addBookmarkModal = this.addBookmarkModal.bind(this);
- 
+
   }
 
   handleNameChange(event) {
-  	
+    //Another way to retrieve the value from the Form tag
     this.setState({name: event.target.value });
   }
 
   handleCommentChange(event) {
-  	
+
     this.setState({comment: event.target.value });
   }
 
@@ -93,7 +93,7 @@ class Popup extends React.Component {
               <h6>{this.props.currentBookmark.comment}</h6>
             </label>
           </div>
-          
+
         </Modal.Body>
 
         <Modal.Footer className='bg-dark justify-content-between'>
@@ -111,7 +111,8 @@ class Popup extends React.Component {
 
   render (){
   	return(
-  	 this.props.currentModal === 'add' ? this.addBookmarkModal() : this.displayBookmarkModal() 
+      //One modal for adding bookmark and one for displying
+  	  this.props.currentModal === 'add' ? this.addBookmarkModal() : this.displayBookmarkModal()
   	);
   }
 }
@@ -120,8 +121,6 @@ Popup.propTypes = {
   currentModal: PropTypes.string,
   currentBookmark: PropTypes.object.isRequired,
   addBookmark: PropTypes.func.isRequired,
-  nameText: PropTypes.string,
-  commetText: PropTypes.string,
   lat: PropTypes.number,
   lng: PropTypes.number,
   zoom: PropTypes.number.isRequired,

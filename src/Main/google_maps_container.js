@@ -1,13 +1,12 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
-import { putMarkerOnMap, closeModal, openModal, goToBookmark, addGoogleApiKey } from '../Actions/google_maps_actions.js';
+import { putMarkerOnMap, goToBookmark, addGoogleApiKey } from '../Actions/google_maps_actions.js';
 import GoogleMaps from './GoogleMaps.js';
 
 
 
 const mapStateToProps = (state) => {
   return {
-    text: state.google.text,
   	lat: state.google.lat,
   	lng: state.google.lng,
   	zoom: state.google.zoom,
@@ -20,7 +19,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ putMarkerOnMap, closeModal, openModal, goToBookmark, addGoogleApiKey }, dispatch); 
+  return bindActionCreators({ putMarkerOnMap, goToBookmark, addGoogleApiKey }, dispatch);
   }
 
 export default connect(

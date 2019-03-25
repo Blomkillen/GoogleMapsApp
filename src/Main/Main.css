@@ -2,10 +2,5 @@
 	width: 100%;
     height: 70%;
 	display: flex;
-	justify-content: space-between; ; 
-}
-.topMenu{
-    width: 100%;
-    height: 30%;
-    background-color: green;
+	justify-content: space-between; ;
 }

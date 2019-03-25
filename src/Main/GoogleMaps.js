@@ -5,8 +5,6 @@ import Marker from '../Marker/marker_container.js';
 import Popup from '../Popup/popup_container.js';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const googleApiKey = 'AIzaSyD-uqYxDHqx4cIyDH7s0zvTxuRMdRsjhtM';
- 
 class GoogleMaps extends React.Component {
   constructor(props) {
     super(props);
@@ -19,15 +17,19 @@ class GoogleMaps extends React.Component {
     this.onChangeEvent = this.onChangeEvent.bind(this);
     this.handleKeySubmit = this.handleKeySubmit.bind(this);
 
-    this.textInput = React.createRef(); 
- 
+    //reference to get the value from the Form tag
+    this.textInput = React.createRef();
+
   }
 
   componentDidUpdate(prevProps){
+    //Updates the local state when a bookmarked is clicked since the
+    //Google maps object doesn't respond to parent state changes.
+    //So the center and zoom variables has to be in local state.
      if (this.props.bookmarkClicked !== prevProps.bookmarkClicked) {
       this.setState({
         center: { lat: this.props.lat, lng: this.props.lng },
-        zoom: this.props.zoom,      
+        zoom: this.props.zoom,
       });
     }
   }
@@ -35,15 +37,17 @@ class GoogleMaps extends React.Component {
   handleClick({ x, y, lat, lng, event }){
     this.setState({
       center: {lat: lat, lng: lng },
-      zoom: this.state.zoom <= 11 ? 11 : this.state.zoom,      
+      //if the current zoom is below 11, it won't zoom out to the default 11
+      zoom: this.state.zoom <= 11 ? 11 : this.state.zoom,
     });
     this.props.putMarkerOnMap({lat: lat, lng: lng, zoom: this.state.zoom });
   }
 
   onChangeEvent({center, zoom}){
+    //Updates local state when user pans or zooms the map.
     this.setState({
       center: center,
-      zoom: zoom,      
+      zoom: zoom,
     });
   }
 
@@ -52,7 +56,8 @@ class GoogleMaps extends React.Component {
   }
 
   render() {
-    if(this.props.googleApiKey.length < 39){ //I dont know if all API keys are of length 39(?!)
+    //I dont know if all API keys are of length 39(?!)
+    if(this.props.googleApiKey.length < 39){
       return(
       <Modal.Dialog>
         <Modal.Header className='bg-dark'>
@@ -104,12 +109,10 @@ GoogleMaps.propTypes = {
   lng: PropTypes.number,
   showMarker: PropTypes.bool.isRequired,
   showModal: PropTypes.bool.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  openModal: PropTypes.func.isRequired,
   putMarkerOnMap: PropTypes.func.isRequired,
   bookmarkClicked: PropTypes.bool.isRequired,
   addGoogleApiKey: PropTypes.func.isRequired,
   googleApiKey: PropTypes.string,
 }
- 
+
 export default GoogleMaps;

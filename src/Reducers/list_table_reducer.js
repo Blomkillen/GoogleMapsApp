@@ -15,6 +15,8 @@ function list_table(state = initialState, action) {
           });
     case DELETE_ITEM:
       return Object.assign({}, state, {
+            //Filter the current state list to not
+            //include the item to be deleted
             bookmarks: state.bookmarks.filter((item) => item.id !== action.id)
           });
     default:
